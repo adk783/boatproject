@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm7nxv8b8v0b7"]
+
+[ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://rngtcjjnub63" path="res://scenes/boat.tscn" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://c4favms6f5lb6" path="res://assets/citrus_orchard_road_puresky_4k.exr" id="3_sugp2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
+panorama = ExtResource("3_sugp2")
+energy_multiplier = 0.6
+
+[sub_resource type="Sky" id="Sky_jyhfs"]
+sky_material = SubResource("PanoramaSkyMaterial_sugp2")
+
+[sub_resource type="Environment" id="Environment_tbgi4"]
+background_mode = 2
+sky = SubResource("Sky_jyhfs")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.58352, 9.88883)
+
+[node name="Node3D" parent="." instance=ExtResource("1_o5qli")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.848866, 0.312661, -0.426227, -0.078015, 0.871591, 0.483987, 0.52282, -0.377588, 0.764256, -16.7749, 18.4704, 25.6651)
+light_color = Color(1, 0.714868, 0.669018, 1)
+
+[node name="boat" parent="." node_paths=PackedStringArray("floater_markers") instance=ExtResource("2_0wfyh")]
+mass = 120.0
+linear_damp = 0.05
+angular_damp = 0.1
+floater_markers = [NodePath("floater1"), NodePath("floater2"), NodePath("floater3"), NodePath("floater4"), NodePath("floater5"), NodePath("floater6"), NodePath("floater7"), NodePath("floater8")]
+water_path = NodePath("../Node3D2/MeshInstance3D")
+k_buoyancy = 7000.0
+c_damping = 560.0
+max_force = 11000.0
+disable_above_surface = true
+surface_threshold = 0.04
+c_tangent = 170.0
+hull_drag = 2.2
+hull_angular_drag = 1.4
+turn_torque = 1600.0
+com_offset = Vector3(0, -0.28, 0.03)
+steer_rate = 8.0
+
+[node name="Node3D2" parent="." instance=ExtResource("1_o5qli")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tbgi4")
+
+[editable path="boat"]
+[editable path="boat/Sketchfab_Scene"]
+[editable path="Node3D2"]

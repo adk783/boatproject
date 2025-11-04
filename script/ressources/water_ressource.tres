@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WaveSettings" load_steps=2 format=3 uid="uid://drh76h8tl4vkn"]
+
+[ext_resource type="Script" uid="uid://k5rg0a5b11q3" path="res://script/ressources/water_param_ressource.gd" id="1_3wq1r"]
+
+[resource]
+script = ExtResource("1_3wq1r")
+wave_count = 2
+amplitude = Array[float]([0.5, 0.03, 0.03])
+wavelength = Array[float]([30.0, 6.0, 5.0])
+speed = Array[float]([0.3, 0.2, 0.2])
+direction = Array[Vector2]([Vector2(0.8, -0.775), Vector2(1, 0), Vector2(0, 1)])
+steepness = Array[float]([9.0, 0.1, 0.1])
+metadata/_custom_type_script = "uid://k5rg0a5b11q3"
