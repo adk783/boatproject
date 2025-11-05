@@ -4,59 +4,84 @@ extends RigidBody3D
 @export var floater_markers: Array[Node3D] = []
 @export var water_path: NodePath
 
-@export var k_buoyancy: float = 5200.0       # spring strength (increase if it sinks)
-@export var c_damping: float = 320.0         # damping to reduce bouncing
-@export var max_force: float = 12000.0       # clamp buoyant force per floater
-@export var disable_above_surface := true    # skip if not underwater
-@export var surface_threshold: float = 0.02  # dead-zone near surface to avoid ghost forces (meters)
-@export var c_tangent: float = 140.0          # tangent damping (horizontal)
-@export var hull_drag: float = 2.0           # overall movement drag
-@export var hull_angular_drag: float = 1.0   # overall rotational drag
+@export var k_buoyancy: float = 5200.0       # spring strength (monte si ça coule trop)
+@export var c_damping: float = 320.0         # amortit les rebonds
+@export var max_force: float = 12000.0       # clamp par floater
+@export var disable_above_surface := true    # ignore s'il n'est pas sous l'eau
+@export var surface_threshold: float = 0.02  # zone morte près de la surface (m)
+@export var c_tangent: float = 140.0         # frottement tangent (horizontal)
+@export var hull_angular_drag: float = 1.0   # amortissement angulaire global
 
-# === Movement ===
-@export var move_force: float = 4000.0       # forward/backward force
-@export var turn_torque: float = 800.0       # steering torque
-
-# === Stabilization ===
+# === Stabilisation / COM ===
 @export var angular_damp_strength: float = 4.0
-@export var com_offset: Vector3 = Vector3(0, -0.25, 0)  # lower CoM for self-righting
+@export var com_offset: Vector3 = Vector3(0.0, -0.25, 0.0)  # COM abaissé pour auto-redressement
 
-# === Movement tuning ===
-@export var max_speed: float = 6.0        # m/s ~ 21.6 km/h
-@export var accel_rate: float = 2.5       # montée d'accélérateur (par s)
-@export var decel_rate: float = 3.5       # relâchement (par s)
-@export var steer_rate: float = 4.0       # vitesse de braquage du gouvernail (par s)
+# === Etat ===
+var _submersion_ratio: float = 1.0   # 0..1 (mis à jour par la flottabilité)
 
-var throttle: float = 0.0                 # -1..+1 (arrière..avant)
-var rudder: float = 0.0                   # -1..+1 (gauche..droite)
-var _submersion_ratio: float = 1.0        # 0..1 (mis à jour par la flottabilité)
+# === Référence eau ===
+@onready var water = get_node_or_null(water_path)
 
-# === Water reference ===
-@onready var water := get_node_or_null(water_path)
+# === Moteur basique : thrust + rotation ===
+@export var move_force: float = 4000.0
+@export var turn_torque: float = 800.0
+@export var prop_local_offset: Vector3 = Vector3(0.0, -0.28, 0.85)  # Y bas, Z vers la poupe (+Z)
 
 func _ready() -> void:
 	if water == null:
 		push_warning("⚠️ No water node assigned — buoyancy disabled.")
 	else:
-		print("✅ Boat buoyancy + movement system active")
+		print("✅ Boat buoyancy (no user control) active")
 
-	# Enable custom center of mass
+	# COM custom
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = com_offset
 
-	# Stability
+	# Stabilisation générale
 	angular_damp = angular_damp_strength
-
 
 
 func _physics_process(delta: float) -> void:
 	if water:
 		_apply_wave_buoyancy()
-	_handle_input(delta)
-	_apply_drag()
+		_apply_drag()
+	_apply_basic_engine(delta)
+	
+func _apply_basic_engine(_delta: float) -> void:
+	if not accept_control:
+		return
+
+	# Avant du bateau (à plat)
+	var fwd := -transform.basis.z.normalized()
+	fwd = (fwd - fwd.project(Vector3.UP)).normalized()
+	if fwd == Vector3.ZERO:
+		return
+
+	# Immersion utile
+	var subm: float = clamp(_submersion_ratio, 0.0, 1.0)
+	if subm < 0.05:
+		return
+
+	# --- PROPULSION au point hélice (génère un couple "nez vers le haut") ---
+	if abs(ctrl_throttle) > 0.001:
+		var prop_world := global_transform.origin + transform.basis * prop_local_offset
+		var r := prop_world - global_transform.origin
+		var F := fwd * move_force * ctrl_throttle
+		apply_force(F, r)
+
+	# --- BRAQUAGE simple ---
+	if abs(ctrl_rudder) > 0.001:
+		apply_torque(Vector3.UP * turn_torque * ctrl_rudder)
+
+	# --- DAMPING de tangage (anti-porpoising / anti-plongeon) ---
+	var ang_local := transform.basis.inverse() * angular_velocity
+	var pitch_rate := ang_local.x                               # +X = tangage
+	var kd_pitch := 2.8                                         # augmente si ça pompe encore
+	var torque_pitch_local := Vector3(-kd_pitch * pitch_rate, 0.0, 0.0)
+	apply_torque(transform.basis * torque_pitch_local)
 
 
-# === Real buoyancy that follows wave height & normal ===
+# === Flottabilité suivant hauteur & normale des vagues ===
 func _apply_wave_buoyancy() -> void:
 	var total_force := Vector3.ZERO
 	var underwater_points := 0
@@ -68,26 +93,25 @@ func _apply_wave_buoyancy() -> void:
 			continue
 		var p: Vector3 = marker.global_transform.origin
 
-		# --- Water data ---
+		# Données eau depuis ton node "water"
 		var info: Dictionary = water.get_height_and_normal(p)
 		var h: float = info["height"]
 		var n: Vector3 = (info["normal"] as Vector3).normalized()
 
-		# --- Depth ---
+		# Profondeur: >0 = sous la surface
 		var depth: float = h - p.y
-		# Dead-zone near surface avoids tiny "ghost" forces when barely out of water
 		if disable_above_surface and depth <= surface_threshold:
 			continue
 
 		underwater_points += 1
 
-		# --- Local velocity of the floater point ---
+		# Vitesse locale du point
 		var r: Vector3 = p - global_transform.origin
 		var v_point: Vector3 = linear_velocity + angular_velocity.cross(r)
 		var v_along_n: float = v_point.dot(n)
 		var v_tan: Vector3 = v_point - n * v_along_n
 
-		# --- Forces ---
+		# Forces
 		var F_spring: Vector3 = n * (k_per * max(depth, 0.0))
 		var F_damping: Vector3 = -n * (c_damping * v_along_n)
 		var F_tangent: Vector3 = -v_tan * c_tangent
@@ -95,78 +119,66 @@ func _apply_wave_buoyancy() -> void:
 
 		apply_force(F_total, r)
 		total_force += F_total
-	
+
 	_submersion_ratio = float(underwater_points) / float(n_pts)
-	# === Global safety clamp (sum of all floaters) ===
+
+	# Clamp global de sécurité (somme des floaters)
 	var max_total_force := max_force * floater_markers.size()
 	if total_force.length() > max_total_force:
-		# We already applied forces per floater; this clamp prevents runaway totals in edge cases
 		total_force = total_force.normalized() * max_total_force
 
-	# === If boat is fully airborne, apply light air drag ===
+	# Si totalement en l'air, applique un léger drag d'air
 	if underwater_points == 0:
 		_apply_air_drag()
 
 
-# === Movement Controls (fixed) ===
-func _handle_input(delta: float) -> void:
-	var fwd := -transform.basis.z.normalized()
-	# Avant du bateau = -Z
-	# on retire toute composante verticale pour ne pas "sauter"
-	var fwd_flat := (fwd - fwd.project(Vector3.UP)).normalized()
-	if fwd_flat == Vector3.ZERO:
-		return
-	# --- Throttle lissé (-1..+1) ---
-	var target_throttle := 0.0
-	if Input.is_action_pressed("W") or Input.is_action_pressed("Z"): # ZQSD
-		target_throttle = 1.0
-	elif Input.is_action_pressed("S"):
-		target_throttle = -0.6        # marche arrière plus faible
-	var rate := accel_rate if abs(target_throttle) > abs(throttle) else decel_rate
-	throttle = lerp(throttle, target_throttle, clamp(rate * delta, 0.0, 1.0))
-
-	# --- Gouvernail lissé (-1..+1) ---
-	var target_rudder := 0.0
-	if Input.is_action_pressed("A") or Input.is_action_pressed("Q"):
-		target_rudder = 1.0           # gauche (sens +Y)
-	elif Input.is_action_pressed("D"):
-		target_rudder = -1.0          # droite
-	rudder = lerp(rudder, target_rudder, clamp(steer_rate * delta, 0.0, 1.0))
-	# --- Limite de vitesse et modulation par immersion ---
-	var speed := linear_velocity.length()
-	var subm: float = clamp(_submersion_ratio, 0.0, 1.0)     # 0..1
-	var thrust_scale: float = subm                            # pas de traction en l'air
-	var speed_norm: float = clamp(speed / max_speed, 0.0, 1.0)
-	var steer_scale: float = (0.35 + 0.65 * speed_norm) * subm
-
-	# Cap de vitesse douce
-	var speed_scale := 1.0
-	if speed > max_speed:
-		speed_scale = clamp(1.0 - (speed - max_speed) / max_speed, 0.0, 1.0)
-	# --- Application des forces ---
-	var thrust := move_force * throttle * thrust_scale * speed_scale
-	apply_central_force(fwd_flat * thrust)
-
-	# Couple de rotation (rudder) proportionnel à la vitesse utile
-	if abs(rudder) > 0.001:
-		apply_torque(Vector3.UP * (turn_torque * rudder * steer_scale))
-
-
-
-# === Global drag (water resistance) ===
+# === Drag hydrodynamique directionnel (quadratique) + amortissement angulaire ===
 func _apply_drag() -> void:
-	# Linear drag
-	if linear_velocity.length() > 0.001:
-		apply_central_force(-linear_velocity * hull_drag)
+	if linear_velocity == Vector3.ZERO and angular_velocity == Vector3.ZERO:
+		return
 
-	# Angular drag
-	if angular_velocity.length() > 0.001:
-		apply_torque(-angular_velocity * hull_angular_drag)
+	var fwd   := -transform.basis.z.normalized()
+	var right :=  transform.basis.x.normalized()
+	var up    :=  Vector3.UP
+
+	var v := linear_velocity
+	var v_fwd  := v.dot(fwd)
+	var v_side := v.dot(right)
+	var v_upv  := v.dot(up)
+
+	# Coeffs: peu de drag longitudinal (laisser glisser), fort latéral, moyen vertical
+	var Cf := 0.35
+	var Cs := 2.20
+	var Cu := 1.60
+
+	# F = -C * v * |v|
+	var F_drag := (
+		-(Cf * v_fwd  * absf(v_fwd))  * fwd
+		- (Cs * v_side * absf(v_side)) * right
+		- (Cu * v_upv  * absf(v_upv))  * up
+	)
+	apply_central_force(F_drag)
+
+	# Damping angulaire global
+	var ang := angular_velocity
+	if ang.length() > 0.001:
+		apply_torque(-ang * hull_angular_drag)
 
 
-# === Air drag when out of water (prevents endless spinning/drifting) ===
+# === Drag d'air quand le bateau est hors de l'eau ===
 func _apply_air_drag() -> void:
-	var air_drag_coeff := 0.3
-	var air_angular_drag_coeff := 0.3
+	var air_drag_coeff := 0.30
+	var air_angular_drag_coeff := 0.30
 	apply_central_force(-linear_velocity * air_drag_coeff)
 	apply_torque(-angular_velocity * air_angular_drag_coeff)
+
+# === API de contrôle (inputs externes) ===
+@export var accept_control: bool = true
+var ctrl_throttle: float = 0.0    # -1..+1
+var ctrl_rudder: float = 0.0      # -1..+1
+
+func set_input(throttle: float, rudder: float) -> void:
+	if not accept_control:
+		return
+	ctrl_throttle = clamp(throttle, -1.0, 1.0)
+	ctrl_rudder   = clamp(rudder,   -1.0, 1.0)

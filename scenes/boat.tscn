@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://rngtcjjnub63"]
+[gd_scene load_steps=7 format=3 uid="uid://rngtcjjnub63"]
 
 [ext_resource type="Script" uid="uid://cjk33sm73tgoy" path="res://script/boat_buoyancy.gd" id="1_0063d"]
 [ext_resource type="PackedScene" uid="uid://dh0r2ca7n6a2y" path="res://assets/fishing_boat.glb" id="2_qyrje"]
 [ext_resource type="Script" uid="uid://c66b706jiu2qd" path="res://script/camera_follow.gd" id="3_lw6pk"]
+[ext_resource type="Script" uid="uid://3kaoo73ndd1" path="res://scenes/boatcontrol.gd" id="4_evv4r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7twq"]
 size = Vector3(2, 1, 4)
@@ -55,5 +56,8 @@ shape = SubResource("ConvexPolygonShape3D_qyrje")
 transform = Transform3D(1, 0, 0, 0, 0.960779, 0.277315, 0, -0.277315, 0.960779, 0, 4, 5.5)
 current = true
 script = ExtResource("3_lw6pk")
+
+[node name="Controller" type="Node" parent="."]
+script = ExtResource("4_evv4r")
 
 [editable path="Sketchfab_Scene"]
