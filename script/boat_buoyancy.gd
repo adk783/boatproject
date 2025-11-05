@@ -1,5 +1,24 @@
 extends RigidBody3D
 
+# === Propulsion / Contrôle ===
+@export_group("Propulsion")
+@export var engine_force: float = 4200.0         # poussée max en marche avant
+@export var reverse_force: float = 2200.0        # poussée max en marche arrière
+@export var throttle_response: float = 4.5       # interpolation par seconde vers la consigne
+@export var steering_torque: float = 1900.0      # couple de rotation brut
+@export var steering_response: float = 6.0       # rapidité de réponse du gouvernail
+@export var high_speed_turn_damping: float = 0.35 # 0-1 : réduit le braquage à haute vitesse
+@export var steering_high_speed: float = 18.0    # vitesse (m/s) à partir de laquelle le braquage est réduit
+@export var propeller_offset: Vector3 = Vector3(0.0, -0.25, 1.55) # position locale de poussée (vers la poupe)
+@export var bow_offset: Vector3 = Vector3(0.0, 0.35, -1.85)       # point d'application de la portance avant
+
+@export_group("Stabilité dynamique")
+@export var yaw_stability: float = 1400.0        # couple qui ramène l'étrave dans l'axe de déplacement
+@export var yaw_stability_speed: float = 6.0     # vitesse (m/s) pour atteindre la pleine stabilisation
+@export var planing_lift: float = 260.0          # portance dynamique appliquée sur l'avant
+@export var planing_lift_speed: float = 22.0     # vitesse pour portance max
+
+@export_group("Flottabilité / Eau")
 # === Buoyancy / Eau ===
 @export var floater_markers: Array[Node3D] = []
 @export var water_path: NodePath
@@ -13,10 +32,12 @@ extends RigidBody3D
 @export var hull_angular_drag: float = 1.0   # amortissement angulaire global
 
 # === Stabilisation / COM ===
+@export_group("Stabilisation / COM")
 @export var angular_damp_strength: float = 4.0
 @export var com_offset: Vector3 = Vector3(0.0, -0.25, 0.0)  # COM abaissé pour auto-redressement
 
 # === Option: pondération auto des floaters (plus de portance à l'arrière) ===
+@export_group("Répartition des floaters")
 @export var auto_weight_enabled: bool = true
 @export var front_weight: float = 0.6     # poids de flottabilité pour l'avant (Z le plus négatif)
 @export var rear_weight: float  = 2.2     # poids pour l'arrière (Z le plus positif)
@@ -25,16 +46,20 @@ extends RigidBody3D
 var _submersion_ratio: float = 1.0   # 0..1 (mis à jour)
 var _z_min: float = 0.0
 var _z_max: float = 1.0
+var _throttle_target: float = 0.0
+var _rudder_target: float = 0.0
+var _throttle_input: float = 0.0
+var _rudder_input: float = 0.0
 
 # === Référence eau ===
 @onready var water = get_node_or_null(water_path)
 
 
 func _ready() -> void:
-	if water == null:
-		push_warning("⚠️ No water node assigned — buoyancy disabled.")
-	else:
-		print("✅ Boat buoyancy only (no user control) active")
+        if water == null:
+                push_warning("⚠️ No water node assigned — buoyancy disabled.")
+        else:
+                print("✅ Boat buoyancy + propulsion active")
 
 	# COM custom
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
@@ -48,9 +73,86 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if water:
-		_apply_wave_buoyancy()
-	_apply_drag()
+        if water:
+                _apply_wave_buoyancy()
+        _apply_drag()
+        _update_controls(_delta)
+
+
+func set_input(throttle: float, rudder: float) -> void:
+        _throttle_target = clampf(throttle, -1.0, 1.0)
+        _rudder_target = clampf(rudder, -1.0, 1.0)
+
+
+func _update_controls(delta: float) -> void:
+        var throttle_lerp := clampf(delta * throttle_response, 0.0, 1.0)
+        var steering_lerp := clampf(delta * steering_response, 0.0, 1.0)
+
+        _throttle_input = lerpf(_throttle_input, _throttle_target, throttle_lerp)
+        _rudder_input = lerpf(_rudder_input, _rudder_target, steering_lerp)
+
+        _apply_propulsion()
+        _apply_rudder()
+        _apply_dynamic_stability()
+
+
+func _apply_propulsion() -> void:
+        if absf(_throttle_input) <= 0.001:
+                return
+
+        var forward := -transform.basis.z.normalized()
+
+        var thrust_force := Vector3.ZERO
+        if _throttle_input > 0.0:
+                thrust_force = forward * (_throttle_input * engine_force)
+        else:
+                thrust_force = -forward * (-_throttle_input * reverse_force)
+
+        if thrust_force != Vector3.ZERO:
+                var force_offset := global_transform.basis * propeller_offset
+                apply_force(thrust_force, force_offset)
+
+        if _throttle_input > 0.0 and planing_lift > 0.0:
+                var speed_forward := max(linear_velocity.dot(forward), 0.0)
+                if speed_forward > 0.1:
+                        var speed_ratio := clampf(speed_forward / max(planing_lift_speed, 0.1), 0.0, 1.0)
+                        var lift_force := Vector3.UP * (planing_lift * speed_ratio * speed_ratio)
+                        var lift_offset := global_transform.basis * bow_offset
+                        apply_force(lift_force, lift_offset)
+
+
+func _apply_rudder() -> void:
+        if absf(_rudder_input) <= 0.001:
+                return
+
+        var forward := -transform.basis.z.normalized()
+        var up := transform.basis.y.normalized()
+
+        var speed_forward := linear_velocity.dot(forward)
+        var speed_ratio := clampf(absf(speed_forward) / max(steering_high_speed, 0.1), 0.0, 1.0)
+        var torque_scale := lerpf(1.0, high_speed_turn_damping, speed_ratio)
+
+        var yaw_torque := _rudder_input * steering_torque * torque_scale
+        apply_torque(up * yaw_torque)
+
+
+func _apply_dynamic_stability() -> void:
+        var velocity := linear_velocity
+        if velocity.length() < 0.2 or yaw_stability <= 0.0:
+                return
+
+        var forward := -transform.basis.z.normalized()
+        var up := transform.basis.y.normalized()
+
+        var velocity_dir := velocity.normalized()
+        var yaw_error := forward.cross(velocity_dir).dot(up)
+
+        if absf(yaw_error) <= 0.0005:
+                return
+
+        var speed_factor := clampf(velocity.length() / max(yaw_stability_speed, 0.1), 0.0, 1.0)
+        var corrective_torque := -yaw_error * yaw_stability * speed_factor
+        apply_torque(up * corrective_torque)
 
 
 # === Helper: bornes Z locales des floaters (pour pondération avant/arrière) ===
