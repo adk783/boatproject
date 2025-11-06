@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://pcpgxn8l1dt4"
+path.s3tc="res://.godot/imported/speedboat_0.png-ccf5dc0755ed893b4e7e6b6fd94e4044.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "bcda7d7518fc85da2c4c8c3826f1b07c"
+}
+
+[deps]
+
+source_file="res://assets/boatmodel/speedboat_0.png"
+dest_files=["res://.godot/imported/speedboat_0.png-ccf5dc0755ed893b4e7e6b6fd94e4044.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
