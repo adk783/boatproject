@@ -30,7 +30,7 @@ var _submersion_ratio: float = 1.0   # 0..1 (mis à jour)
 
 # Poussée hélice
 @export var thrust_max: float = 14000.0      # N : poussée maximale
-@export var reverse_factor: float = 0.6      # 0..1 : puissance en marche arrière
+@export var reverse_factor: float = 0.1      # 0..1 : puissance en marche arrière
 
 # Gouvernail 
 @export var turn_gain: float = 3200.0        # N·m : intensité de rotation (yaw)
@@ -188,12 +188,14 @@ func _apply_propulsion() -> void:
 	if throttle == 0.0:
 		return
 
+	
 	# Poussée avant/arrière (marche arrière limitée)
 	var t = throttle
 	if t < 0.0:
 		t *= reverse_factor
 
 	var thrust = thrust_max * t
+
 
 	# Option : réduire la poussée si quasi hors de l’eau (évite l’effet "fusée")
 	var subm = clamp(_submersion_ratio * 1.2, 0.0, 1.0)
