@@ -19,6 +19,10 @@ run/max_fps=60
 
 window/size/mode=2
 
+[global_group]
+
+Player=""
+
 [input]
 
 throttle_forward={

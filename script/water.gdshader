@@ -1,8 +1,10 @@
 shader_type spatial;
 
 uniform float time;
+uniform vec3  playerPosition;
 
 const int MAX_WAVE_COUNT = 15;
+
 
 uniform int waveCount=2;
 uniform float amplitude[MAX_WAVE_COUNT];
@@ -15,11 +17,13 @@ varying vec3 v_normal_geom; // normale géométrique (analytique) vers le fragme
 
 void vertex() {
 	vec3 pos = VERTEX;
+	float dist = distance(pos.xz, playerPosition.xz);
+	float max_dist = 100.0; 
 
     // Tangentes initiales
     vec3 Tx = vec3(1.0, 0.0, 0.0);
     vec3 Tz = vec3(0.0, 0.0, 1.0);
-
+	if (max_dist-dist> 0.0) {
     for (int i = 0; i < waveCount; i++) {
         vec2 d = normalize(direction[i]);
         float k = 2.0 * 3.14159265 / wavelength[i];
@@ -43,7 +47,7 @@ void vertex() {
         Tx += (dPx_dx - vec3(1.0, 0.0, 0.0));
         Tz += (dPx_dz - vec3(0.0, 0.0, 1.0));
 	}
-
+	}
 
     VERTEX = pos;
 

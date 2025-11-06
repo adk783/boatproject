@@ -99,3 +99,6 @@ func _process(delta):
 	var t = Time.get_ticks_msec() / 1000.0
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("time", t)
+		var players = get_tree().get_nodes_in_group("Player")
+		var player = players[0]  # premier node du groupe Player
+		mat.set_shader_parameter("playerPosition", player.global_position)

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://drh76h8tl4vkn" path="res://script/ressources/water_ressource.tres" id="3_p1n2c"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qmoj4"]
-size = Vector2(200, 200)
+size = Vector2(2000, 2000)
 subdivide_width = 1000
 subdivide_depth = 1000
 
@@ -23,6 +23,7 @@ noise = SubResource("FastNoiseLite_p1n2c")
 render_priority = 0
 shader = ExtResource("1_s3811")
 shader_parameter/time = 1.0
+shader_parameter/playerPosition = Vector3(0, 0, 0)
 shader_parameter/waveCount = 1
 shader_parameter/amplitude = PackedFloat32Array(0.8, 0.6, 0, 0, 0)
 shader_parameter/wavelength = PackedFloat32Array(20, 14, 0, 0, 0)
