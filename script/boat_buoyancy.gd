@@ -144,9 +144,9 @@ func _apply_drag() -> void:
 	var v_upv := v.dot(up)
 
 	# Coeffs directionnels
-	var Cf := 0.35
-	var Cs := 2.20
-	var Cu := 1.60
+	var Cf := 0.18
+	var Cs := 1.50
+	var Cu := 0.9
 
 	var F_drag := (
 		-(Cf * v_fwd  * absf(v_fwd))  * fwd
@@ -215,8 +215,8 @@ func _apply_propulsion() -> void:
 	var thrust_front: float = 0.0
 
 	if prop_marker != null and prop_front_marker != null:
-		thrust_rear = thrust * 0.5
-		thrust_front = thrust - thrust_rear  # évite l'erreur d'arrondi
+		thrust_rear = thrust * 0.9
+		thrust_front = thrust * 0.1  
 	elif prop_marker != null:
 		thrust_rear = thrust
 	elif prop_front_marker != null:

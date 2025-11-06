@@ -42,7 +42,8 @@ hull_angular_drag = 2.2
 com_offset = Vector3(0, -0.38, -0.32)
 prop_marker_path = NodePath("Marker3D")
 prop_front_marker_path = NodePath("front")
-force_limit = 14000.0
+thrust_max = 22000.0
+force_limit = 26000.0
 
 [node name="Node3D2" parent="." instance=ExtResource("1_o5qli")]
 
