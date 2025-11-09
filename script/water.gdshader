@@ -18,7 +18,7 @@ varying vec3 v_normal_geom; // normale géométrique (analytique) vers le fragme
 void vertex() {
 	vec3 pos = VERTEX;
 	float dist = distance(pos.xz, playerPosition.xz);
-	float max_dist = 100.0; 
+	float max_dist = 100.0;
 
     // Tangentes initiales
     vec3 Tx = vec3(1.0, 0.0, 0.0);
