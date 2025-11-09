@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://drh76h8tl4vkn" path="res://script/ressources/water_ressource.tres" id="3_p1n2c"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qmoj4"]
-size = Vector2(199, 199)
+size = Vector2(2000, 2000)
 subdivide_width = 1000
 subdivide_depth = 1000
 
