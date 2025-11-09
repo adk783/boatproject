@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm7nxv8b8v0b7"]
+[gd_scene load_steps=8 format=3 uid="uid://bm7nxv8b8v0b7"]
 
 [ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://rngtcjjnub63" path="res://scenes/boat.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://c4favms6f5lb6" path="res://assets/citrus_orchard_road_puresky_4k.exr" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://b3d3mh1ybnsa0" path="res://script/camra_springarm.gd" id="4_jyhfs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
 panorama = ExtResource("3_sugp2")
@@ -16,9 +17,6 @@ background_mode = 2
 sky = SubResource("Sky_jyhfs")
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.58352, 9.88883)
 
 [node name="Node3D" parent="." instance=ExtResource("1_o5qli")]
 
@@ -49,6 +47,15 @@ force_limit = 26000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tbgi4")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("follow_target")]
+spring_length = 8.0
+script = ExtResource("4_jyhfs")
+follow_target = NodePath("../boat")
+max_vertical_angle = -0.310669
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.31195)
 
 [editable path="boat"]
 [editable path="boat/Sketchfab_Scene"]

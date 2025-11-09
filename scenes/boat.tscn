@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://rngtcjjnub63"]
+[gd_scene load_steps=5 format=3 uid="uid://rngtcjjnub63"]
 
 [ext_resource type="Script" uid="uid://cjk33sm73tgoy" path="res://script/boat_buoyancy.gd" id="1_0063d"]
-[ext_resource type="Script" uid="uid://c66b706jiu2qd" path="res://script/camera_follow.gd" id="3_lw6pk"]
 [ext_resource type="PackedScene" uid="uid://b6u724ibt8eag" path="res://assets/boatmodel/speedboat.glb" id="4_fsggc"]
 
 [sub_resource type="GDScript" id="GDScript_lw6pk"]
@@ -40,11 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, -0.62, -2)
 
 [node name="floater8" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, -0.62, -2)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.960779, 0.277315, 0, -0.277315, 0.960779, 0, 4, 6.5)
-current = true
-script = ExtResource("3_lw6pk")
 
 [node name="Controller" type="Node" parent="."]
 script = SubResource("GDScript_lw6pk")

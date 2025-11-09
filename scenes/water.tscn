@@ -39,7 +39,7 @@ shader_parameter/time_scale = 0.025
 shader_parameter/noise_scale = 5.0
 shader_parameter/noise_strength = 0.23
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.228951, 0.266254, 0.154724)
