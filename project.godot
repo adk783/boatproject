@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Projet bateau Ant_Leo_Raph"
-run/main_scene="uid://bm7nxv8b8v0b7"
+run/main_scene="uid://cm4hfvmn2hj4h"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 

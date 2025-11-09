@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://cm4hfvmn2hj4h"]
+
+[ext_resource type="Script" uid="uid://c45s1ggkry6df" path="res://script/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://b2covucicqrlr" path="res://assets/fondv2.png" id="2_ekxnf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(0.117647, 0.141176, 0.188235, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.164706, 0.180392, 0.215686, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.164706, 0.180392, 0.215686, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ekxnf")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+text = "GODOT GAME"
+horizontal_alignment = 1
+
+[node name="buttonplay" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+text = "PLAY"
+
+[node name="buttonquit" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wu84c")
+text = "QUIT"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/buttonplay" to="." method="_on_buttonplay_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/buttonquit" to="." method="_on_buttonquit_pressed"]
