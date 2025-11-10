@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bm7nxv8b8v0b7"]
 
 [ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://d37ip2tn22sss" path="res://script/3D.gd" id="1_tefeu"]
+[ext_resource type="Script" path="res://script/3D.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://rngtcjjnub63" path="res://scenes/boat.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://c4favms6f5lb6" path="res://assets/citrus_orchard_road_puresky_4k.exr" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://b3d3mh1ybnsa0" path="res://script/camra_springarm.gd" id="4_jyhfs"]
+[ext_resource type="Script" path="res://script/camra_springarm.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://43qxppf3880" path="res://scenes/shark.tscn" id="5_shark"]
 [ext_resource type="PackedScene" uid="uid://cqtboo7kbge7u" path="res://scenes/lighthouse.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://mf5f0556rp2" path="res://scenes/PlayerFPS.tscn" id="8_tipki"]
