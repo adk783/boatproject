@@ -28,8 +28,9 @@ func _physics_process(delta: float) -> void:
 	# Directions locales
 	var input_dir := Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("move_back")  - Input.get_action_strength("move_forward")
+		Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
 	).normalized()
+
 
 	var forward := -transform.basis.z
 	var right := transform.basis.x
