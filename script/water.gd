@@ -94,11 +94,32 @@ func get_wave_offset(new_point: Vector3, pos_on_wave: Vector3) -> Vector3:
 		0.0,
 		pos_on_wave.z - new_point.z
 	)
-	
+
+
 func _process(delta):
 	var t = Time.get_ticks_msec() / 1000.0
+
+	var players = get_tree().get_nodes_in_group("Player")
+	if players.size() == 0:
+		return
+
+	var player :Node3D= players[0]
+
+	# ======================
+	# suivi du joueur
+	# ======================
+	var follow_radius := 25.0
+	var player_xz = Vector3(player.global_position.x, global_position.y, player.global_position.z)
+
+	if global_position.distance_to(player_xz) > follow_radius:
+		# on recolle le plane au joueur uniquement sur XZ
+		global_position.x = player.global_position.x
+		global_position.z = player.global_position.z
+
+	# ======================
+	# update shader
+	# ======================
 	if mat and mat is ShaderMaterial:
 		mat.set_shader_parameter("time", t)
-		var players = get_tree().get_nodes_in_group("Player")
-		var player = players[0]  # premier node du groupe Player
 		mat.set_shader_parameter("playerPosition", player.global_position)
+		mat.set_shader_parameter("globalPosition", global_position)

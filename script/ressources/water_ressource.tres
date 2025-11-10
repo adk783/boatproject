@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_3wq1r")
-wave_count = 5
-amplitude = Array[float]([0.3, 0.05, 0.07, 0.1, 0.03])
-wavelength = Array[float]([30.0, 6.0, 5.0, 6.0, 3.0])
-speed = Array[float]([0.3, 0.2, 0.2, 0.3, 0.3])
-direction = Array[Vector2]([Vector2(0.8, -0.775), Vector2(1, 0), Vector2(0, 1), Vector2(0, -0.5), Vector2(0, -1)])
-steepness = Array[float]([9.0, 0.1, 0.1, 0.5, 0.5])
+wave_count = 1
+amplitude = Array[float]([0.2])
+wavelength = Array[float]([30.0])
+speed = Array[float]([0.3])
+direction = Array[Vector2]([Vector2(0.8, -0.775)])
+steepness = Array[float]([6.0])
 metadata/_custom_type_script = "uid://k5rg0a5b11q3"
