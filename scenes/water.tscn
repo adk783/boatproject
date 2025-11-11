@@ -26,7 +26,7 @@ shader_parameter/time = 1.0
 shader_parameter/playerPosition = Vector3(0, 0, 0)
 shader_parameter/globalPosition = Vector3(0, 0, 0)
 shader_parameter/waveCount = 1
-shader_parameter/amplitude = PackedFloat32Array(0.24)
+shader_parameter/amplitude = PackedFloat32Array(0.2)
 shader_parameter/wavelength = PackedFloat32Array(20)
 shader_parameter/speed = PackedFloat32Array(0.4)
 shader_parameter/direction = PackedVector2Array(1, 0)
@@ -34,13 +34,14 @@ shader_parameter/steepness = PackedFloat32Array(6)
 shader_parameter/octaves = 21
 shader_parameter/albedo = Color(0.000760045, 0.195955, 0.245744, 1)
 shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.02
+shader_parameter/roughness = 0.103
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_ewrsg")
 shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_ewrsg")
 
 [node name="Node3D2" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("PlaneMesh_qmoj4")
 surface_material_override/0 = SubResource("ShaderMaterial_x4ob8")
 script = ExtResource("2_p1n2c")

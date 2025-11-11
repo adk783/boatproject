@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_3wq1r")
 wave_count = 1
-amplitude = Array[float]([0.2])
+amplitude = Array[float]([0.26])
 wavelength = Array[float]([30.0])
 speed = Array[float]([0.3])
 direction = Array[Vector2]([Vector2(0.8, -0.775)])
