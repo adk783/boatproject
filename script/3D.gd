@@ -17,11 +17,15 @@ func _switch_to_fps() -> void:
 	$boat.freeze = true
 
 	# placer le joueur sur le ponton du Lighthouse
-	$PlayerFPS.global_transform.origin = $lighthouse/SpawnPoint.global_transform.origin
+	$PlayerFPS.global_transform = $lighthouse/SpawnPoint.global_transform
+	$PlayerFPS.yaw   = $PlayerFPS.rotation_degrees.y
+	$PlayerFPS.pitch = $PlayerFPS/FPSCamera.rotation_degrees.x
+	
 	$PlayerFPS.visible = true
 	$PlayerFPS.set_physics_process(true)
 
 	# switch caméras
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$SpringArm3D/Camera3D.current = false
 	$PlayerFPS/FPSCamera.current = true
 

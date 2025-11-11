@@ -12,11 +12,12 @@ var gravity := ProjectSettings.get_setting("physics/3d/default_gravity") as floa
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and $FPSCamera.current:
-		yaw -= event.relative.x * mouse_sens * 0.01 * 57.2958 # rad->deg factor
-		pitch -= event.relative.y * mouse_sens * 0.01 * 57.2958
+		yaw -= event.relative.x * mouse_sens
+		pitch -= event.relative.y * mouse_sens
 		pitch = clamp(pitch, -max_look_up, max_look_up)
 		rotation_degrees.y = yaw
 		$FPSCamera.rotation_degrees.x = pitch

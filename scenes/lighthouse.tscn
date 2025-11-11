@@ -52,14 +52,14 @@ visible = false
 visible = false
 
 [node name="DockTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160, -2, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 180, -18)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DockTrigger"]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, 0, -10)
 shape = SubResource("BoxShape3D_sfgnq")
 
 [node name="SpawnPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155, 10, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 170, -16)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
