@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqtboo7kbge7u"]
+[gd_scene load_steps=13 format=3 uid="uid://cqtboo7kbge7u"]
 
 [ext_resource type="PackedScene" uid="uid://ic8mbqg65my3" path="res://assets/lighthouse/lighthouse_diorama.glb" id="1_sfgnq"]
+[ext_resource type="Script" uid="uid://5g3x748t8w5i" path="res://script/spot_light_3d.gd" id="2_rsylc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sfgnq"]
 
@@ -55,7 +56,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 180, -18)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DockTrigger"]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, 0, -10)
+transform = Transform3D(120, 0, 0, 0, 120, 0, 0, 0, 120, 0, 0, -10)
 shape = SubResource("BoxShape3D_sfgnq")
 
 [node name="SpawnPoint" type="Marker3D" parent="."]
@@ -98,5 +99,14 @@ shape = SubResource("ConcavePolygonShape3D_op407")
 [node name="Island" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(-5.26364, 1.09825e-22, 4.94606e-07, 0, 5.65763, -1.25625e-15, -4.60162e-07, -1.25625e-15, -5.65763, -100.5, 37.0456, 107.46)
 shape = SubResource("ConcavePolygonShape3D_23eva")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.925871, 0.377841, 0, -0.377841, 0.925871, -23.7912, 287.655, -94.0168)
+light_color = Color(1, 0.964706, 0.835294, 1)
+light_energy = 2000.0
+shadow_enabled = true
+spot_range = 2000.0
+spot_angle = 20.0
+script = ExtResource("2_rsylc")
 
 [editable path="Sketchfab_Scene"]
