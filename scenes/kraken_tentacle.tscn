@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ifw7wy3fapl2" path="res://assets/krakenmodel/kraken_animation.glb" id="1_d5pd8"]
 [ext_resource type="Script" uid="uid://cenvs5lsy3aon" path="res://script/kraken_tentacle.gd" id="1_lhcm0"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_d5pd8"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_lhcm0"]
 
 [node name="KrakenTentacle" type="Node3D"]
 script = ExtResource("1_lhcm0")
@@ -81,8 +81,8 @@ speed_scale = 0.8
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(120, 0, 0, 0, 120, 0, 0, 0, 120, 0, 0, 0)
-shape = SubResource("BoxShape3D_d5pd8")
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+shape = SubResource("SphereShape3D_lhcm0")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
