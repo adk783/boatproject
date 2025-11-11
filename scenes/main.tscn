@@ -22,10 +22,10 @@ sky_material = SubResource("PanoramaSkyMaterial_sugp2")
 background_mode = 2
 sky = SubResource("Sky_jyhfs")
 fog_enabled = true
-fog_density = 0.0661
 fog_height = 0.1
 fog_height_density = 0.1
 volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.375621, 0.588094, 0.473122, 1)
 volumetric_fog_anisotropy = 0.3
 
 [node name="Node3D" type="Node3D"]
