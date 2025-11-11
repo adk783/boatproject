@@ -51,3 +51,8 @@ func _cycle_loop() -> void:
 		var gap := _cycle_gap()
 		if gap > 0.0:
 			await get_tree().create_timer(gap).timeout
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.name == "boat":
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")

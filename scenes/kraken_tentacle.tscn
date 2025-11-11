@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv0w7o5nkcu4w"]
+[gd_scene load_steps=4 format=3 uid="uid://cyicqmf1wax3o"]
 
 [ext_resource type="PackedScene" uid="uid://ifw7wy3fapl2" path="res://assets/krakenmodel/kraken_animation.glb" id="1_d5pd8"]
 [ext_resource type="Script" uid="uid://cenvs5lsy3aon" path="res://script/kraken_tentacle.gd" id="1_lhcm0"]
@@ -83,5 +83,7 @@ speed_scale = 0.8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 shape = SubResource("BoxShape3D_d5pd8")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="Sketchfab_Scene"]
