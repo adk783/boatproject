@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bm7nxv8b8v0b7"]
+[gd_scene load_steps=14 format=3 uid="uid://bm7nxv8b8v0b7"]
 
 [ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://d37ip2tn22sss" path="res://script/3D.gd" id="1_tefeu"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cqtboo7kbge7u" path="res://scenes/lighthouse.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://mf5f0556rp2" path="res://scenes/PlayerFPS.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://bv0w7o5nkcu4w" path="res://scenes/kraken_tentacle.tscn" id="9_85g3d"]
+[ext_resource type="AudioStream" uid="uid://dn551yiiicf66" path="res://assets/sounds/mainsound.ogg" id="10_choun"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
 panorama = ExtResource("3_sugp2")
@@ -82,6 +83,11 @@ rise_time = 10.0
 hold_time = 10.0
 fall_time = 10.0
 interval = 20.0
+
+[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_choun")
+autoplay = true
+parameters/looping = false
 
 [connection signal="body_entered" from="lighthouse/DockTrigger" to="." method="_on_dock_trigger_body_entered"]
 
