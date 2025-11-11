@@ -11,8 +11,7 @@ var pitch := 0.0 # rotation verticale (caméra)
 var gravity := ProjectSettings.get_setting("physics/3d/default_gravity") as float
 
 func _ready() -> void:
-	# Au départ on peut laisser la souris libre; ton Main gèrera l'activation.
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and $FPSCamera.current:
