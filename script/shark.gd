@@ -73,4 +73,5 @@ func stop_chase() -> void:
 	target = null
 
 func _on_catch_area_body_entered(body: Node3D) -> void:
-	pass
+	if body.name == "boat":
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
