@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://43qxppf3880" path="res://scenes/shark.tscn" id="5_shark"]
 [ext_resource type="PackedScene" uid="uid://cqtboo7kbge7u" path="res://scenes/lighthouse.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://mf5f0556rp2" path="res://scenes/PlayerFPS.tscn" id="8_tipki"]
-[ext_resource type="PackedScene" uid="uid://bv0w7o5nkcu4w" path="res://scenes/kraken_tentacle.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://cyicqmf1wax3o" path="res://scenes/kraken_tentacle.tscn" id="9_85g3d"]
 [ext_resource type="AudioStream" uid="uid://dn551yiiicf66" path="res://assets/sounds/mainsound.ogg" id="10_choun"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
