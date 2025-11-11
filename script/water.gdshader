@@ -56,7 +56,7 @@ void vertex() {
 
             Tx += (dPx_dx - vec3(1.0, 0.0, 0.0));
             Tz += (dPx_dz - vec3(0.0, 0.0, 1.0));
-        
+
     }
 
     VERTEX = pos;

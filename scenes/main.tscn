@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bm7nxv8b8v0b7"]
+[gd_scene load_steps=13 format=3 uid="uid://bm7nxv8b8v0b7"]
 
 [ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://d37ip2tn22sss" path="res://script/3D.gd" id="1_tefeu"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://43qxppf3880" path="res://scenes/shark.tscn" id="5_shark"]
 [ext_resource type="PackedScene" uid="uid://cqtboo7kbge7u" path="res://scenes/lighthouse.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://mf5f0556rp2" path="res://scenes/PlayerFPS.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://bv0w7o5nkcu4w" path="res://scenes/kraken_tentacle.tscn" id="9_85g3d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
 panorama = ExtResource("3_sugp2")
@@ -74,6 +75,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -16
 move_speed = 10.0
 jump_velocity = 10.0
 
+[node name="KrakenTentacle" parent="." instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
 [connection signal="body_entered" from="lighthouse/DockTrigger" to="." method="_on_dock_trigger_body_entered"]
 
 [editable path="boat"]
@@ -82,3 +91,5 @@ jump_velocity = 10.0
 [editable path="lighthouse"]
 [editable path="lighthouse/Sketchfab_Scene"]
 [editable path="PlayerFPS"]
+[editable path="KrakenTentacle"]
+[editable path="KrakenTentacle/Sketchfab_Scene"]
