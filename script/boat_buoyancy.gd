@@ -1,5 +1,5 @@
 extends RigidBody3D
-
+@onready var particules = $GPUParticles3D
 # === Buoyancy / Eau ===
 @export var floater_markers: Array[Node3D] = []
 @export var water_path: NodePath
@@ -74,6 +74,7 @@ func _physics_process(_delta: float) -> void:
 	_apply_propulsion()
 	_apply_steering()
 	_apply_drag()
+
 
 
 # --- Flottabilité (répartition uniforme entre floaters) ---
@@ -268,9 +269,13 @@ func _update_controls(delta: float) -> void:
 	var t_target := 0.0
 	if Input.is_action_pressed("throttle_forward"):
 		t_target = 1.0
+		particules.emitting = true
 	elif Input.is_action_pressed("throttle_reverse"):
 		t_target = -1.0
-
+		particules.emitting = false
+	else:
+		particules.emitting = false
+		
 	var s_target := 0.0
 	if Input.is_action_pressed("steer_left"):
 		s_target -= 1.0
@@ -280,3 +285,4 @@ func _update_controls(delta: float) -> void:
 	# Lissage (évite les pics quand on presse/relâche)
 	throttle = lerp(throttle, t_target, clamp(input_smooth * delta, 0.0, 1.0))
 	steer    = lerp(steer,    s_target, clamp(input_smooth * delta, 0.0, 1.0))
+	
