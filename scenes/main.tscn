@@ -308,6 +308,14 @@ hold_time = 10.0
 fall_time = 10.0
 interval = 20.0
 
+[node name="KrakenTentacle9" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 167.632, 0, -524.259)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
 [node name="KrakenTentacle4" parent="kraken" instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -205.492, 0.574646, -710.336)
 depth_y = -30.0
@@ -340,8 +348,24 @@ hold_time = 10.0
 fall_time = 10.0
 interval = 20.0
 
+[node name="KrakenTentacle11" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -243.168, 0.574646, -1045.33)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
 [node name="KrakenTentacle8" parent="kraken" instance=ExtResource("9_85g3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.742, 0.574646, -484.732)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.742, 0.574646, -439.235)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle10" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.742, 0.574646, -585.285)
 depth_y = -30.0
 rise_time = 10.0
 hold_time = 10.0
@@ -388,6 +412,8 @@ interval = 20.0
 [editable path="kraken/KrakenTentacle2/Sketchfab_Scene"]
 [editable path="kraken/KrakenTentacle3"]
 [editable path="kraken/KrakenTentacle3/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle9"]
+[editable path="kraken/KrakenTentacle9/Sketchfab_Scene"]
 [editable path="kraken/KrakenTentacle4"]
 [editable path="kraken/KrakenTentacle4/Sketchfab_Scene"]
 [editable path="kraken/KrakenTentacle5"]
@@ -396,5 +422,9 @@ interval = 20.0
 [editable path="kraken/KrakenTentacle6/Sketchfab_Scene"]
 [editable path="kraken/KrakenTentacle7"]
 [editable path="kraken/KrakenTentacle7/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle11"]
+[editable path="kraken/KrakenTentacle11/Sketchfab_Scene"]
 [editable path="kraken/KrakenTentacle8"]
 [editable path="kraken/KrakenTentacle8/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle10"]
+[editable path="kraken/KrakenTentacle10/Sketchfab_Scene"]
