@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm7nxv8b8v0b7"]
+[gd_scene load_steps=15 format=3 uid="uid://bm7nxv8b8v0b7"]
 
 [ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://d37ip2tn22sss" path="res://script/3D.gd" id="1_tefeu"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://mf5f0556rp2" path="res://scenes/PlayerFPS.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://cyicqmf1wax3o" path="res://scenes/kraken_tentacle.tscn" id="9_85g3d"]
 [ext_resource type="AudioStream" uid="uid://dn551yiiicf66" path="res://assets/sounds/mainsound.ogg" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://cps8twepk6dsi" path="res://scenes/buoy.tscn" id="11_ya4ey"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
 panorama = ExtResource("3_sugp2")
@@ -95,6 +96,14 @@ stream = ExtResource("10_choun")
 autoplay = true
 parameters/looping = false
 
+[node name="buoy" parent="." node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.91156, 0, -6.1689)
+mass = 200.0
+water_path = NodePath("../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
 [connection signal="body_entered" from="lighthouse/DockTrigger" to="." method="_on_dock_trigger_body_entered"]
 
 [editable path="boat"]
@@ -105,3 +114,5 @@ parameters/looping = false
 [editable path="PlayerFPS"]
 [editable path="KrakenTentacle"]
 [editable path="KrakenTentacle/Sketchfab_Scene"]
+[editable path="buoy"]
+[editable path="buoy/Sketchfab_Scene"]
