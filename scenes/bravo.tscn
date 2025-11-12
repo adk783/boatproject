@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cduyoq7itcq28"]
 
 [ext_resource type="Script" uid="uid://byph0mmkxmr" path="res://script/bravo.gd" id="1_g1tt1"]
-[ext_resource type="Texture2D" uid="uid://csux3pd386aga" path="res://assets/ChatGPT Image 12 nov. 2025, 01_44_04.png" id="2_kg204"]
+[ext_resource type="Texture2D" uid="uid://b7unnwy0aqpm8" path="res://assets/ChatGPT Image 12 nov. 2025, 03_37_30.png" id="2_g1tt1"]
 
 [node name="Bravo" type="Control"]
 layout_mode = 3
@@ -23,7 +23,7 @@ offset_right = 786.0
 offset_bottom = 286.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_kg204")
+texture = ExtResource("2_g1tt1")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
