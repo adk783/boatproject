@@ -167,6 +167,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -120.3
 [node name="lighthouse" parent="." instance=ExtResource("7_o6xl0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -160, -1000)
 
+[node name="Island" parent="lighthouse/StaticBody3D" index="7"]
+script = null
+
 [node name="PlayerFPS" parent="." instance=ExtResource("8_tipki")]
 move_speed = 10.0
 jump_velocity = 10.0
