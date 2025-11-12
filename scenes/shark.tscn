@@ -13,17 +13,8 @@ script = ExtResource("1_v5iaq")
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_8l5qy")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.188, -2.3, 0.476)
 
-[node name="Skeleton3D" parent="Sketchfab_Scene/Sketchfab_model/74bf2704f130419aa3610eb053599c66_fbx/Object_2/RootNode/Object_4" index="0"]
-bones/1/rotation = Quaternion(-0.00152213, 0.0455766, 0.0104818, 0.998905)
-bones/2/position = Vector3(3.45918, -0.00190332, 0.294118)
-bones/2/rotation = Quaternion(-0.00252301, -0.123999, -0.0201857, 0.992074)
-bones/3/rotation = Quaternion(-0.00158679, -0.0894282, -0.0176699, 0.995835)
-bones/4/rotation = Quaternion(-0.000569695, -0.0471834, -0.0120597, 0.998813)
-bones/5/rotation = Quaternion(0.000458555, -0.0543005, 0.008432, 0.998489)
-bones/6/rotation = Quaternion(0.00253155, -0.0462423, 0.0505195, 0.997649)
-bones/7/rotation = Quaternion(0.00593867, 0.0277217, 0.12071, 0.992283)
-bones/8/rotation = Quaternion(0.00217864, 0.0818956, -0.0270524, 0.996271)
-bones/10/rotation = Quaternion(-0.27277, 0.959399, 0.0206271, -0.0687439)
+[node name="Sketchfab_model" parent="Sketchfab_Scene" index="0"]
+transform = Transform3D(0.217391, 0, 0, 0, 4.82706e-17, 0.217391, 0, -0.217391, 4.82706e-17, 0, -1.83617, 0)
 
 [node name="detectArea" type="Area3D" parent="."]
 collision_layer = 2

@@ -27,10 +27,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0346473, 3.70014, -0.00114369)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000158429, 3.66526, 0.100486)
 light_color = Color(1, 0.0823529, 0, 1)
 light_energy = 16.0
-light_size = 1.0
-omni_range = 20.27
+light_volumetric_fog_energy = 0.7
+omni_range = 20.53
 
 [editable path="Sketchfab_Scene"]
