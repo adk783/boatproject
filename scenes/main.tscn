@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm7nxv8b8v0b7"]
+[gd_scene load_steps=15 format=3 uid="uid://bm7nxv8b8v0b7"]
 
 [ext_resource type="PackedScene" uid="uid://bsshd88uiv5uh" path="res://scenes/water.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://d37ip2tn22sss" path="res://script/3D.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://rngtcjjnub63" path="res://scenes/boat.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://c4favms6f5lb6" path="res://assets/citrus_orchard_road_puresky_4k.exr" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://b3d3mh1ybnsa0" path="res://script/camra_springarm.gd" id="4_jyhfs"]
+[ext_resource type="Script" path="res://script/camra_springarm.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://43qxppf3880" path="res://scenes/shark.tscn" id="5_shark"]
 [ext_resource type="PackedScene" uid="uid://cqtboo7kbge7u" path="res://scenes/lighthouse.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://mf5f0556rp2" path="res://scenes/PlayerFPS.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://cyicqmf1wax3o" path="res://scenes/kraken_tentacle.tscn" id="9_85g3d"]
 [ext_resource type="AudioStream" uid="uid://dn551yiiicf66" path="res://assets/sounds/mainsound.ogg" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://bdtos8qsi381y" path="res://scenes/buoy.tscn" id="11_ya4ey"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sugp2"]
 panorama = ExtResource("3_sugp2")
@@ -54,6 +55,7 @@ com_offset = Vector3(0, -0.38, -0.32)
 prop_marker_path = NodePath("Marker3D")
 prop_front_marker_path = NodePath("front")
 thrust_max = 22000.0
+reverse_factor = 0.15
 force_limit = 26000.0
 
 [node name="Node3D2" parent="." instance=ExtResource("1_o5qli")]
@@ -73,16 +75,216 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.31195)
 [node name="Sharks" type="Node3D" parent="."]
 
 [node name="Shark" parent="Sharks" instance=ExtResource("5_shark")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -30)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60.2066, 0, -30)
+
+[node name="Shark2" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.0205, 0, -103.874)
+
+[node name="Shark3" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -80.6467, 0, -103.874)
+
+[node name="Shark4" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -19.214, 0, -165.579)
+
+[node name="Shark5" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -114.593, 0, -182.071)
+
+[node name="Shark6" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34.2508, 0, -220.345)
+
+[node name="Shark7" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -66.0232, 0, -307.883)
+
+[node name="Shark14" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -66.0232, 0, -412.696)
+
+[node name="Shark15" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20.373, 0, -452.856)
+
+[node name="Shark16" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17.1731, 0, -416.374)
+
+[node name="Shark17" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25.398, 0, -494.731)
+
+[node name="Shark18" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -54.611, 0, -563.107)
+
+[node name="Shark19" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -25.3247, 0, -598.86)
+
+[node name="Shark20" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -83.5723, 0, -630.863)
+
+[node name="Shark21" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -98.1598, 0, -658.905)
+
+[node name="Shark22" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -48.2837, 0, -658.905)
+
+[node name="Shark23" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -77.5663, 0, -733.107)
+
+[node name="Shark24" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -62.5892, 0, -766.164)
+
+[node name="Shark25" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -70.6819, 0, -815.185)
+
+[node name="Shark26" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -123.744, 0, -838.538)
+
+[node name="Shark27" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -123.744, 0, -894.684)
+
+[node name="Shark28" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -64.7171, 0, -894.684)
+
+[node name="Shark29" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -64.7171, 0, -865.551)
+
+[node name="Shark30" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.35413, 0, -865.551)
+
+[node name="Shark8" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 37.3517, 0, -378.168)
+
+[node name="Shark9" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 110.371, 0, -456.726)
+
+[node name="Shark10" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18.5983, 0, -509.247)
+
+[node name="Shark11" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -100.31, 0, -580.487)
+
+[node name="Shark12" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -82.485, 0, -696.459)
+
+[node name="Shark13" parent="Sharks" instance=ExtResource("5_shark")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -120.359, 0, -805.348)
 
 [node name="lighthouse" parent="." instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -160, -200)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -160, -1000)
 
 [node name="PlayerFPS" parent="." instance=ExtResource("8_tipki")]
 move_speed = 10.0
 jump_velocity = 10.0
 
-[node name="KrakenTentacle" parent="." instance=ExtResource("9_85g3d")]
+[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_choun")
+autoplay = true
+parameters/looping = false
+
+[node name="buoys" type="Node3D" parent="."]
+
+[node name="buoy" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.91156, 0, -77.0492)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy2" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5087, 0, -27.1722)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy3" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.4606, 0, -122.453)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy10" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.3119, 0, -158.852)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy11" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.955, -1.08572, -199.535)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy4" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9409, 0, -213.441)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy5" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.1091, 0, -313.418)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy6" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.5263, 0, -341.394)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy7" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.1552, 0, -477.285)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy8" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45425, 0, -503.348)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy9" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.635, 0, -584.603)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy12" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.635, 0, -694.319)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="buoy13" parent="buoys" node_paths=PackedStringArray("floater_markers") instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.635, 0, -833.883)
+mass = 200.0
+water_path = NodePath("../../Node3D2/MeshInstance3D")
+floater_markers = [NodePath("Marker3D"), NodePath("Marker3D2")]
+c_damping = 120.0
+surface_threshold = 0.01
+
+[node name="kraken" type="Node3D" parent="."]
+
+[node name="KrakenTentacle" parent="kraken" instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 depth_y = -30.0
 rise_time = 10.0
@@ -90,10 +292,61 @@ hold_time = 10.0
 fall_time = 10.0
 interval = 20.0
 
-[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("10_choun")
-autoplay = true
-parameters/looping = false
+[node name="KrakenTentacle2" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -146.03, 0, -308.766)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle3" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 167.632, 0, -376.598)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle4" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -205.492, 0.574646, -710.336)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle5" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.5144, 0.574646, -644.52)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle6" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.5144, 0.574646, -810.602)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle7" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -308.115, 0.574646, -877.64)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
+
+[node name="KrakenTentacle8" parent="kraken" instance=ExtResource("9_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.742, 0.574646, -484.732)
+depth_y = -30.0
+rise_time = 10.0
+hold_time = 10.0
+fall_time = 10.0
+interval = 20.0
 
 [connection signal="body_entered" from="lighthouse/DockTrigger" to="." method="_on_dock_trigger_body_entered"]
 
@@ -103,5 +356,45 @@ parameters/looping = false
 [editable path="lighthouse"]
 [editable path="lighthouse/Sketchfab_Scene"]
 [editable path="PlayerFPS"]
-[editable path="KrakenTentacle"]
-[editable path="KrakenTentacle/Sketchfab_Scene"]
+[editable path="buoys/buoy"]
+[editable path="buoys/buoy/Sketchfab_Scene"]
+[editable path="buoys/buoy2"]
+[editable path="buoys/buoy2/Sketchfab_Scene"]
+[editable path="buoys/buoy3"]
+[editable path="buoys/buoy3/Sketchfab_Scene"]
+[editable path="buoys/buoy10"]
+[editable path="buoys/buoy10/Sketchfab_Scene"]
+[editable path="buoys/buoy11"]
+[editable path="buoys/buoy11/Sketchfab_Scene"]
+[editable path="buoys/buoy4"]
+[editable path="buoys/buoy4/Sketchfab_Scene"]
+[editable path="buoys/buoy5"]
+[editable path="buoys/buoy5/Sketchfab_Scene"]
+[editable path="buoys/buoy6"]
+[editable path="buoys/buoy6/Sketchfab_Scene"]
+[editable path="buoys/buoy7"]
+[editable path="buoys/buoy7/Sketchfab_Scene"]
+[editable path="buoys/buoy8"]
+[editable path="buoys/buoy8/Sketchfab_Scene"]
+[editable path="buoys/buoy9"]
+[editable path="buoys/buoy9/Sketchfab_Scene"]
+[editable path="buoys/buoy12"]
+[editable path="buoys/buoy12/Sketchfab_Scene"]
+[editable path="buoys/buoy13"]
+[editable path="buoys/buoy13/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle"]
+[editable path="kraken/KrakenTentacle/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle2"]
+[editable path="kraken/KrakenTentacle2/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle3"]
+[editable path="kraken/KrakenTentacle3/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle4"]
+[editable path="kraken/KrakenTentacle4/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle5"]
+[editable path="kraken/KrakenTentacle5/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle6"]
+[editable path="kraken/KrakenTentacle6/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle7"]
+[editable path="kraken/KrakenTentacle7/Sketchfab_Scene"]
+[editable path="kraken/KrakenTentacle8"]
+[editable path="kraken/KrakenTentacle8/Sketchfab_Scene"]
