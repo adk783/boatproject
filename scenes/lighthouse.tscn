@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ic8mbqg65my3" path="res://assets/lighthouse/lighthouse_diorama.glb" id="1_sfgnq"]
 [ext_resource type="Script" path="res://script/spot_light_3d.gd" id="2_rsylc"]
-[ext_resource type="Script" path="res://script/MainTower.gd" id="3_5w1y2"]
+[ext_resource type="Script" uid="uid://dhegqg0lk2stm" path="res://script/MainTower.gd" id="3_5w1y2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sfgnq"]
 

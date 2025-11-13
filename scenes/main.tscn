@@ -39,6 +39,7 @@ transform = Transform3D(0.848866, 0.312661, -0.426227, -0.078015, 0.871591, 0.48
 light_color = Color(1, 0.714868, 0.669018, 1)
 
 [node name="boat" parent="." node_paths=PackedStringArray("floater_markers") groups=["Player"] instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.00073)
 mass = 120.0
 linear_damp = 0.05
 angular_damp = 0.1
