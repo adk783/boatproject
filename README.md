@@ -8,7 +8,7 @@ Pour ce projet, nous avons divisé les différentes parties :
 * **Raphaël Ducournau :** Création de l'aspect visuel de l'eau, des vagues et des shaders.
 * **Leonardo Dib :** Level Design, gestion du brouillard et implémentation des ennemis (requins et krakens).
 
-## ⚙️ Détails techniques Antoine Dupuy
+## Détails techniques Antoine Dupuy
 J'ai implémenté :
 
 * **Simulation de Flottabilité (`buoy.gd`) :** Système de points d'ancrage synchronisé avec les vagues.
