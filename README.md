@@ -1,5 +1,5 @@
 # Ocean Navigator
-Aperçu du jeu
+!Aperçu du jeu
 <p align="center">
   <img src="jeu.png" width="45%" />
   <img src="jeu3.png" width="45%" />
