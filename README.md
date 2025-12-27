@@ -1,10 +1,10 @@
 # Ocean Navigator
-![Aperçu du jeu]
 <p align="center">
   <img src="jeu.png" width="45%" />
   <img src="jeu3.png" width="45%" />
 </p>
 *Projet réalisé à trois : Antoine Dupuy, Leonardo Dib, Raphaël Ducournau*
+
 >**Note :** La version la plus à jour du projet se trouve sur la branche **`movementv1`**.
 
 ## Répartition de l'équipe
