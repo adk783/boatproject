@@ -23,9 +23,9 @@ J'ai implémenté :
 * **Algèbre Vectorielle :** Stabilisation et calculs de couples pour le comportement du navire.
 
 
-## Détails techniques Raphael Ducournau
-J'ai implémenté une simulation visuelle de vagues sur un plan:
+## Détails techniques : Raphaël Ducournau
+J'ai implémenté une simulation d'océan dynamique synchronisant le rendu visuel et la détection de hauteur :
 
-* **Fonction sinusoidale de vagues (gerstner): (``) :** .
-* **Derivée de la fonction pour calculé les reflet sur l'eau (``) :** .
-* **Approximation de la hauteur d'une vague en un point (qui a été déplacer (`water.gd`) :** .
+* **Ondes de Gerstner (`water.gdshader`) :** Simulation de vagues réalistes par déplacement de sommets, permettant d'obtenir des crêtes pointues contrairement aux sinusoides classiques.
+* **Calcul de Normales Analytiques (`water.gdshader`) :** Utilisation des dérivées partielles pour calculer la normale exacte de la surface et générer des reflets (PBR) cohérents.
+* **Algorithme d'Approximation (`water.gd`) :** Implémentation d'une fonction de recherche itérative pour calculer la hauteur précise de l'eau sur le CPU, indispensable pour la flottabilité des objets.
