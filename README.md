@@ -28,4 +28,4 @@ J'ai implémenté une simulation visuelle de vagues sur un plan:
 
 * **Fonction sinusoidale de vagues (gerstner): (``) :** .
 * **Derivée de la fonction pour calculé les reflet sur l'eau (``) :** .
-* **Approximation de la hauteur d'une vague en un point (qui a été déplacer (``) :** .
+* **Approximation de la hauteur d'une vague en un point (qui a été déplacer (`water.gd`) :** .
